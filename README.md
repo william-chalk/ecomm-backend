@@ -39,6 +39,7 @@ npm start
 ```
 
 # Walkthrough
+[ecomm-backend-walkthrough.webm](https://user-images.githubusercontent.com/108630160/197898962-a08b6cfb-ddc6-4177-98d9-d104f314b568.webm)
 
 
 # Built With
