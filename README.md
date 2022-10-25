@@ -29,7 +29,7 @@ npm i
 
 mysql -u root -p
 *your mysql password
-source/dc/schema.sql
+source db/schema.sql
 exit
 
 npm run seed
