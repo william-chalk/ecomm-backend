@@ -3,7 +3,7 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get('/', (req, res) => {
+router.get('/',(req, res) => {
   // find all categories
   // be sure to include its associated Products
   Category.findAll({
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   .then((dbCategoryData) => res.json(dbCategoryData))
   .catch((err)=>{
     console.log(err)
-    res.status(400).json(err)
+    res.status(500).json(err)
   })
 });
 
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
     }
     res.json(dbCategoryData)
   })
-  .catch(err=>{
+  .catch((err)=>{
     console.log(err)
     res.status(500).json(err)
   })
@@ -65,6 +65,23 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  Category.update(req.body,{
+    individualHooks: true,
+    where: {
+      id: req.params.id
+    }
+  })
+  .then((dbCategoryData)=>{
+    if(!dbCategoryData){
+      res.status(400).json({message: 'No category found with this id'});
+      return;
+    }
+    res.json(dbCategoryData);
+  })
+  .catch((err)=>{
+    console.log(err);
+    res.status(400).json(err);
+  })
 });
 
 router.delete('/:id', (req, res) => {
